@@ -6,7 +6,8 @@ import './App.css';
 class App extends Component {
   start(){
     debugger;
-    TwitterClient.getTweets();
+    var twitterClient = new TwitterClient();
+    twitterClient.getTweets();
   }
 
   render() {
