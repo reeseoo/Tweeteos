@@ -1,10 +1,7 @@
-import Twitter from 'twitter';
-import config from '../../config'
-
 class TwitterClient {
     getTweets() {
-        var util = require('util'),
-            twitter = require('twitter');
+        var twitter = require('twitter');
+        var config = require('../../config.json')
 
         var twit = new twitter({
             consumer_key: config.twitconsumerkey,
@@ -13,8 +10,14 @@ class TwitterClient {
             access_token_secret: config.twittokensecret
         });
 
-        twit.stream('statuses/filter', { track: '#js' }, function (stream) {
-            console.log(stream);
+        twit.stream('statuses/filter', { track: 'twitter' }, function (stream) {
+            stream.on('data', function (tweet) {
+                console.log(tweet.text);
+            });
+
+            stream.on('error', function (error) {
+                console.log(error);
+            });
         });
     }
 }
