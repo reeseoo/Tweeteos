@@ -1,7 +1,7 @@
 class TwitterClient {
     getTweets() {
         var twitter = require('twitter');
-        var config = require('../../config.json')
+        var config = require('../config.json')
 
         var twit = new twitter({
             consumer_key: config.twitconsumerkey,
