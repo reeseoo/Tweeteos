@@ -6,17 +6,17 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {tweets:[],key:0};
+    this.state = {tweets:[],key:0, input: 'javascript'};
+    this.handleChange = this.handleChange.bind(this);
 
-    var socket = new SocketClient('http://localhost:3001', {query:"tweets=javascript"});
-    socket.on('connect', function(){
+    this.socket = new SocketClient('http://localhost:3001', {query:"tweets=" + this.state.input});
+    this.socket.on('connect', function(){
       console.log('connected')
     });
 
     var _self = this;
 
-    socket.on('event', function(data){
-      debugger;
+    this.socket.on('event', function(data){
       var tweets = _self.state.tweets;
 
       tweets.unshift({
@@ -31,16 +31,43 @@ class App extends Component {
       });
     });
 
-    socket.on('disconnect', function(){});
+    this.socket.on('disconnect', function(){});
   }
-  start(){
-    
+
+  handleChange(event) {
+    this.setState({ input: event.target.value });
+    if (event.target.value.length > 5) {
+      this.socket.disconnect();
+      this.socket = new SocketClient('http://localhost:3001', { query: "tweets=" + this.state.input });
+      this.socket.on('connect', function () {
+        console.log('connected')
+      });
+
+      var _self = this;
+
+      this.socket.on('event', function (data) {
+        var tweets = _self.state.tweets;
+
+        tweets.unshift({
+          key: _self.state.key + 1,
+          text: data.text,
+          image: data.entities.media[0].media_url
+        });
+
+        _self.setState({
+          tweets: tweets.slice(0, 20),
+          key: _self.state.key + 1
+        });
+      });
+
+      this.socket.on('disconnect', function () { });
+    }
   }
 
   render() {
     return (
       <div className="App">
-        {this.start()}
+        <input type="text" value={this.state.input} onChange={this.handleChange}></input>
         <ul>{this.state.tweets.map((tweet) =><li key={tweet.key}><TweeteoCard tweet={tweet}/></li>)}</ul>
       </div>
     );
