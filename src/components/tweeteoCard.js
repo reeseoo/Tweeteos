@@ -5,7 +5,8 @@ class TweeteoCard extends Component {
   render() {
     return (
       <div className="Card">
-        {this.props.tweet}
+        <img src={this.props.tweet.media_url} alt="Tweet Image"/>
+        {this.props.tweet.text}
       </div>
     );
   }

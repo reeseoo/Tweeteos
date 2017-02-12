@@ -8,24 +8,28 @@ var twit = new twitter({
     access_token_secret: config.twittokensecret
 });
 
-
 var server = require('http').createServer();
 var io = require('socket.io')(server);
+var clientRequest = "default";
 
 io.on('connection', function(client){
+  clientRequest = client.handshake.query['tweets'];
+  setStream();
   client.on('event', function(data){});
   client.on('disconnect', function(){});
 });
 
-twit.stream('statuses/filter', { track: 'saturdaykitchen' }, function (stream) {
+server.listen(3001);
+
+function setStream(){
+    twit.stream('statuses/filter', { track: clientRequest }, function (stream) {
+    console.log(`getting tweets for ${clientRequest}`)
     stream.on('data', function (tweet) {
-        console.log(tweet.text);
-        io.emit("event",tweet.text);
+        io.emit("event",tweet);
     });
 
     stream.on('error', function (error) {
         console.log(error);
     });
 });
-
-server.listen(3001);
+}
