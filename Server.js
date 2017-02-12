@@ -12,24 +12,34 @@ var server = require('http').createServer();
 var io = require('socket.io')(server);
 var clientRequest = "default";
 
+var currentStream;
+
 io.on('connection', function(client){
-  clientRequest = client.handshake.query['tweets'];
-  setStream();
-  client.on('event', function(data){});
-  client.on('disconnect', function(){});
+    console.log('connected with handshake: ', client.handshake.query.tweets)
+    clientRequest = client.handshake.query['tweets'];
+    changeTweets(clientRequest||'twitter')
+    client.on('change query', changeTweets);
 });
 
 server.listen(3001);
 
-function setStream(){
-    twit.stream('statuses/filter', { track: clientRequest }, function (stream) {
-    console.log(`getting tweets for ${clientRequest}`)
-    stream.on('data', function (tweet) {
-        io.emit("event",tweet);
-    });
-
-    stream.on('error', function (error) {
-        console.log(error);
-    });
-});
+function changeTweets(data){
+    console.log('changing tweets to: ',data);
+    try{
+        if(currentStream)
+            currentStream.destroy();
+        currentStream = twit.stream('statuses/filter', {track: data});
+        currentStream.on('data', (tweet) => {
+            io.emit("event",tweet);
+        });
+        currentStream.on('error', (error) => {
+            console.log(error);
+        });
+        currentStream.on('end', (error) => {
+            console.log("stream ended");
+        });
+    }
+    catch(exc){
+        console.log('failed to change tweets ',exc);
+    }
 }
