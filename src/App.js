@@ -6,7 +6,7 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {tweets:[],key:0, input: 'javascript'};
+    this.state = {tweets:[],key:0, input: 'brexit'};
     this.handleChange = this.handleChange.bind(this);
 
     this.socket = new SocketClient('http://localhost:3001', {query:"tweets=" + this.state.input});
@@ -19,11 +19,19 @@ class App extends Component {
     this.socket.on('event', function(data){
       var tweets = _self.state.tweets;
 
-      tweets.unshift({
-        key:_self.state.key+1,
-        text:data.text,
-        image: data.entities.media[0].media_url
-      });
+      if (data.extended_entities != null && data.extended_entities != undefined) {
+        tweets.unshift({
+          key: _self.state.key + 1,
+          text: data.text,
+          image: data.entities.media[0].media_url
+        });
+      } else {
+        tweets.unshift({
+          key: _self.state.key + 1,
+          text: data.text,
+          //image: data.entities.media[0].media_url
+        });
+      }
 
       _self.setState({
         tweets: tweets.slice(0,20),

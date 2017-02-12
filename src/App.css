@@ -28,6 +28,15 @@
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
+.Imagecard {
+    width: 20%;
+    background-color: #ffffff;
+    float: left;
+    margin: 20px;
+    height: 100px;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
 li{
   list-style-type: none;
 }
