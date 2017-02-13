@@ -8,7 +8,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.changeSubject = debounce(750,this.changeSubject);
-    this.state = {tweets:[],key:0, input: 'brexit'};
+    this.state = {tweets:[],key:0, input: 'cats'};
     this.socket = new SocketClient('http://localhost:3001', {query:"tweets=" + this.state.input});
     this.socket.on('connect', function(){
       console.log('connected')
@@ -17,20 +17,12 @@ class App extends Component {
     var _self = this;
 
     this.socket.on('event', (data)=>{
-      
       var tweets = _self.state.tweets;
-      if (data.extended_entities) {
-        tweets.unshift({
-          key: _self.state.key + 1,
-          text: data.text,
-          image: data.entities.media[0].media_url
-        });
-      } else {
-        tweets.unshift({
-          key: _self.state.key + 1,
-          text: data.text
-        });
-      }
+      tweets.unshift({
+        key: _self.state.key + 1,
+        text: data.text,
+        image: data.extended_entities ? data.entities.media[0].media_url : null
+      });
 
       _self.setState({
         tweets: tweets.slice(0,20),
@@ -50,9 +42,9 @@ class App extends Component {
     {
       this.socket.emit('change query',this.state.input);
       this.setState({ lastInput: this.state.input });
-    }
-    
+    } 
   }
+
   render() {
     return (
       <div className="App">
