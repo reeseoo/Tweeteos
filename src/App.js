@@ -44,6 +44,7 @@ class App extends Component {
   handleChange(event) {
     this.setState({ input: event.target.value.trim() });
   }
+  
   changeSubject() {
     if(this.state.input !== this.state.lastInput)
     {

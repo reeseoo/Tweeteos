@@ -5,16 +5,15 @@ class TweeteoCard extends Component {
 
   displayImage(tweet){
     if(tweet.image != null){
-      //return <div style={{backgroundImage: '${tweet.image}', height: '200px', width: '150px'}}></div>
-      return <img src={tweet.image} alt="Tweet" style={{height: '100px', width: '20%'}}/>
+      return <div className="ImageCard"> <img src={tweet.image} alt="Tweet" style={{height: '150px', margin: 'auto'}}/> </div>
     }
   }
 
   render() {
     return (
       <div className="Card">
-        <div className="ImageCard">{this.displayImage(this.props.tweet)}</div>
-        <div>{this.props.tweet.text}</div>
+        <div>{this.displayImage(this.props.tweet)}</div>
+        <div className="CardText">{this.props.tweet.text}</div>
       </div>
     );
   }
