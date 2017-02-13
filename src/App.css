@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #498C8A; 
+  background-color: #7A89C2; 
 }
 
 .App-logo {
@@ -28,12 +28,11 @@
 }
 
 .CardText {
-    height: 100px;    
+    max-height: 150px;    
 }
 
 .ImageCard {
-    background-color: #ffffff;
-    margin: 20px;
+    background-color: #72788D;
     height: 150px;
 }
 
