@@ -9,11 +9,17 @@ class TweeteoCard extends Component {
     }
   }
 
+  displayRetweets(tweet){
+    if(tweet.retweets > 0){
+      return <div>{this.props.tweet.retweets}</div>
+    }
+  }
+
   render() {
     return (
       <div className="Card">
         <div>{this.displayImage(this.props.tweet)}</div>
-        <div className="CardText">{this.props.tweet.text}</div>
+        <div className="CardText">{this.displayRetweets(this.props.tweet)} <br/> {this.props.tweet.text}</div>
       </div>
     );
   }

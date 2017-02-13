@@ -18,16 +18,32 @@ class App extends Component {
 
     this.socket.on('event', (data)=>{
       var tweets = _self.state.tweets;
-      tweets.unshift({
-        key: _self.state.key + 1,
-        text: data.text,
-        image: data.extended_entities ? data.entities.media[0].media_url : null
-      });
+      var duplicate = false;
 
-      _self.setState({
-        tweets: tweets.slice(0,20),
-        key:_self.state.key+1
-      });
+      for(var i = 0; i < tweets.length; i++){
+          if(data.retweeted_status && data.retweeted_status.text.indexOf(tweets[i].text) !== -1){
+            duplicate = true;
+            tweets[i].retweets++;
+            _self.setState({
+              tweets: tweets.slice(0, 20),
+              key: _self.state.key + 1,
+            });
+        }
+      }
+
+      if (!duplicate) {
+        tweets.unshift({
+          key: _self.state.key + 1,
+          text: data.text,
+          retweets: 0,
+          image: data.extended_entities ? data.entities.media[0].media_url : null
+        });
+
+        _self.setState({
+          tweets: tweets.slice(0, 20),
+          key: _self.state.key + 1,
+        });
+      }
     });
 
     this.socket.on('disconnect', function(){});
