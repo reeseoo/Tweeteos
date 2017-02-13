@@ -5,7 +5,7 @@ class TweeteoCard extends Component {
 
   displayImage(tweet){
     if(tweet.image != null){
-      return <div className="ImageCard"> <img src={tweet.image} alt="Tweet" style={{height: '150px', margin: 'auto'}}/> </div>
+      return <div className="ImageCard"> <img src={tweet.image} alt="Tweet" style={{height: '125px', margin: 'auto', maxWidth: '100%'}}/> </div>
     }
   }
 
@@ -15,11 +15,19 @@ class TweeteoCard extends Component {
     }
   }
 
+  cardSwitcher(tweet){
+    if(tweet.image != null){
+        return <div><div>{this.displayImage(tweet)}</div>
+        <div className="CardText">{this.displayRetweets(tweet)} <br/> {tweet.text}</div></div>
+    }else{
+        return <div className="CardTextTwo">{this.displayRetweets(tweet)} <br/> {tweet.text}</div>
+    }
+  }
+
   render() {
     return (
       <div className="Card">
-        <div>{this.displayImage(this.props.tweet)}</div>
-        <div className="CardText">{this.displayRetweets(this.props.tweet)} <br/> {this.props.tweet.text}</div>
+        {this.cardSwitcher(this.props.tweet)}
       </div>
     );
   }

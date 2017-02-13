@@ -23,18 +23,27 @@
     width: 22%;
     background-color: #ffffff;
     float: left;
-    margin: 20px;
+    margin: 10px 20px;
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .CardText {
     min-height: 100px;
-    max-height: 150px;    
+    max-height: 125px;    
+}
+
+.CardTextTwo{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  height: 225px;
+  font-size: 1.3em;
+  text-overflow: ellipsis;
 }
 
 .ImageCard {
     background-color: #72788D;
-    height: 150px;
+    height: 125px;
 }
 
 li{

@@ -25,7 +25,7 @@ class App extends Component {
             duplicate = true;
             tweets[i].retweets++;
             _self.setState({
-              tweets: tweets.slice(0, 20),
+              tweets: tweets.slice(0, 12),
               key: _self.state.key + 1,
             });
         }
@@ -40,7 +40,7 @@ class App extends Component {
         });
 
         _self.setState({
-          tweets: tweets.slice(0, 20),
+          tweets: tweets.slice(0, 12),
           key: _self.state.key + 1,
         });
       }
