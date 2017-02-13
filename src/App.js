@@ -57,7 +57,7 @@ class App extends Component {
     if(this.state.input !== this.state.lastInput)
     {
       this.socket.emit('change query',this.state.input);
-      this.setState({ lastInput: this.state.input });
+      this.setState({ lastInput: this.state.input, tweets: [] });
     } 
   }
 
