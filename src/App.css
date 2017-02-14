@@ -1,6 +1,6 @@
 .App {
   text-align: center;
-  background-color: #7A89C2; 
+  background-color: #8C9A9E; 
 }
 
 .App-logo {
@@ -9,14 +9,14 @@
 }
 
 .App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+  width: 100%;
+  text-align: center;
 }
 
-.App-intro {
-  font-size: large;
+.App-heading {
+  font-size: 2em;
+  font-family: 'Pacifico', cursive;
+  color: #D4F5F5;
 }
 
 .Card{
@@ -42,7 +42,7 @@
 }
 
 .ImageCard {
-    background-color: #72788D;
+    background-color: #747578;
     height: 125px;
 }
 

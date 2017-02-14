@@ -64,6 +64,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        <div className="App-header"><h1 className="App-heading">Tweeteos</h1></div>
         <input type="text" value={this.state.input} onChange={this.handleChange.bind(this)} onKeyUp={this.changeSubject.bind(this)}></input>
         <ul>{this.state.tweets.map((tweet) =><li key={tweet.key}><TweeteoCard tweet={tweet}/></li>)}</ul>
       </div>
