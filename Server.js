@@ -21,7 +21,7 @@ io.on('connection', function(client){
     client.on('change query', changeTweets);
 });
 
-server.listen(3001);
+server.listen(process.env.PORT || 3001);
 
 function changeTweets(data){
     console.log('changing tweets to: ',data);
