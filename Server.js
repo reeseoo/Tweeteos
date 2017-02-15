@@ -8,7 +8,9 @@ var twit = new twitter({
     access_token_secret: process.env.twittokensecret
 });
 
-var server = require('http').createServer().listen(process.env.PORT || 3001);;
+var express = require('express'),
+    app = express();
+var server = require('http').createServer(app).listen(process.env.PORT || 3001);;
 var io = require('socket.io')(server);
 var clientRequest = "default";
 
