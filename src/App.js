@@ -9,7 +9,7 @@ class App extends Component {
     super(props);
     this.changeSubject = debounce(750,this.changeSubject);
     this.state = {tweets:[],key:0, input: 'cats'};
-    this.socket = new SocketClient('http://localhost:3001', {query:"tweets=" + this.state.input});
+    this.socket = new SocketClient('https://tweeteos.herokuapp.com/', {query:"tweets=" + this.state.input});
     this.socket.on('connect', function(){
       console.log('connected')
     });
