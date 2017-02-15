@@ -8,7 +8,7 @@ var twit = new twitter({
     access_token_secret: process.env.twittokensecret
 });
 
-var server = require('http').createServer();
+var server = require('http').createServer().listen(process.env.PORT || 3001);;
 var io = require('socket.io')(server);
 var clientRequest = "default";
 
@@ -20,8 +20,6 @@ io.on('connection', function(client){
     changeTweets(clientRequest||'twitter')
     client.on('change query', changeTweets);
 });
-
-server.listen(process.env.PORT || 3001);
 
 function changeTweets(data){
     console.log('changing tweets to: ',data);
