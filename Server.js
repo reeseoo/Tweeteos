@@ -14,6 +14,14 @@ var server = require('http').createServer(app).listen(process.env.PORT || 3001);
 var io = require('socket.io')(server);
 var clientRequest = "default";
 
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
+app.get('/', function (req, res) {
+  res.sendfile(__dirname + '/index.html');
+});
+
 var currentStream;
 
 io.on('connection', function(client){

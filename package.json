@@ -14,7 +14,8 @@
     "twitter": "^1.7.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "npm run build && npm run sockets",
+    "dev": "react-scripts start",
     "sockets": "node server.js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
