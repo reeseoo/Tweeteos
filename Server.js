@@ -10,8 +10,9 @@ var twit = new twitter({
 
 var express = require('express').use((req, res) => res.sendFile(INDEX)),
     app = express();
-var server = require('http').createServer(app).listen(process.env.PORT || 3001);
-var io = require('socket.io')(server);
+var server = require('http').createServer(app);
+var io = require('socket.io').listen(server);
+server.listen(process.env.PORT || 3001);
 var clientRequest = "default";
 
 var currentStream;
