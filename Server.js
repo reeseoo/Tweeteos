@@ -8,19 +8,11 @@ var twit = new twitter({
     access_token_secret: process.env.twittokensecret
 });
 
-var express = require('express'),
+var express = require('express').use((req, res) => res.sendFile(INDEX)),
     app = express();
-var server = require('http').createServer(app).listen(process.env.PORT || 3001);;
+var server = require('http').createServer(app).listen(process.env.PORT || 3001);
 var io = require('socket.io')(server);
 var clientRequest = "default";
-
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
-
-app.get('/', function (req, res) {
-  res.sendfile(__dirname + '/index.html');
-});
 
 var currentStream;
 
