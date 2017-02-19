@@ -9,12 +9,7 @@ var twit = new twitter({
 });
 
 var express = require('express'),
-    app = express();
-
-app.get('*', function(req, res) {
-  res.sendFile(path.join(__dirname,'build/index.html'));
-});
-
+    app = express().use((req, res) => res.sendFile(__dirname + '/build/index.html'));
 var server = require('http').createServer(app);
 var io = require('socket.io').listen(server);
 server.listen(process.env.PORT || 3001);
