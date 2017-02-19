@@ -3,7 +3,7 @@ var config = require('./src/config.json')
 
 var twit = new twitter({
     consumer_key: process.env.twitconsumerkey,
-    consumer_secret: process.env.twitconsumerkey,
+    consumer_secret: process.env.twitconsumersecret,
     access_token_key: process.env.twitaccesstoken,
     access_token_secret: process.env.twittokensecret
 });
