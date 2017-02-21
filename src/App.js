@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import SocketClient from 'socket.io-client';
 import TweeteoCard from './components/tweeteoCard'
+import ControlPanel from './components/controlPanel'
 import {debounce} from 'throttle-debounce';
 import './App.css';
 
@@ -8,7 +9,7 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.changeSubject = debounce(750,this.changeSubject);
-    this.state = {tweets:[],key:0, input: 'cats'};
+    this.state = {tweets:[],key:0, input: 'cats', panelVisible: false};
     this.socket = new SocketClient(window.location.hostname, {query:"tweets=" + this.state.input});
     this.socket.on('connect', function(){
       console.log('connected')
@@ -61,10 +62,16 @@ class App extends Component {
     } 
   }
 
+    handleClick(event) {
+    this.setState({ panelVisible: !this.state.panelVisible });
+  }
+
   render() {
     return (
       <div className="App">
         <div className="App-header"><h1 className="App-heading">Tweeteos</h1></div>
+        <ControlPanel panelVisible={this.state.panelVisible} />
+        <div style={{height: "50px", width: "30px", backgroundColor:"black", position: "absolute", top: "0"}} onClick={this.handleClick.bind(this)}></div>
         <input type="text" value={this.state.input} onChange={this.handleChange.bind(this)} onKeyUp={this.changeSubject.bind(this)}></input>
         <ul>{this.state.tweets.map((tweet) =><li key={tweet.key}><TweeteoCard tweet={tweet}/></li>)}</ul>
       </div>

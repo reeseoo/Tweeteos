@@ -20,7 +20,7 @@ var currentStream;
 io.on('connection', function(client){
     console.log('connected with handshake: ', client.handshake.query.tweets)
     clientRequest = client.handshake.query['tweets'];
-    changeTweets(clientRequest||'twitter')
+    //changeTweets(clientRequest||'twitter')
     client.on('change query', changeTweets);
 });
 
