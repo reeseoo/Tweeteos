@@ -54,10 +54,10 @@ class App extends Component {
     this.setState({ input: event.target.value.trim() });
   }
   
-  changeSubject() {
+  changeSubject(socket) {
     if(this.state.input !== this.state.lastInput)
     {
-      this.socket.emit('change query',this.state.input);
+      socket.emit('change query',this.state.input);
       this.setState({ lastInput: this.state.input, tweets: [] });
     } 
   }
@@ -70,7 +70,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header"><h1 className="App-heading">Tweeteos</h1></div>
-        <ControlPanel panelVisible={this.state.panelVisible} input={this.state.input} changeSubject={this.changeSubject} handleChange={this.handleChange} />
+        <ControlPanel panelVisible={this.state.panelVisible} input={this.state.input} changeSubject={this.changeSubject} handleChange={this.handleChange} socket={this.socket}/>
         <div style={{height: "50px", width: "30px", backgroundColor:"black", position: "absolute", top: "0"}} onClick={this.handleClick.bind(this)}></div>
         <ul>{this.state.tweets.map((tweet) =><li key={tweet.key}><TweeteoCard tweet={tweet}/></li>)}</ul>
       </div>
