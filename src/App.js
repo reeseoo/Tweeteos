@@ -70,9 +70,8 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header"><h1 className="App-heading">Tweeteos</h1></div>
-        <ControlPanel panelVisible={this.state.panelVisible} />
+        <ControlPanel panelVisible={this.state.panelVisible} input={this.state.input} changeSubject={this.changeSubject} handleChange={this.handleChange} />
         <div style={{height: "50px", width: "30px", backgroundColor:"black", position: "absolute", top: "0"}} onClick={this.handleClick.bind(this)}></div>
-        <input type="text" value={this.state.input} onChange={this.handleChange.bind(this)} onKeyUp={this.changeSubject.bind(this)}></input>
         <ul>{this.state.tweets.map((tweet) =><li key={tweet.key}><TweeteoCard tweet={tweet}/></li>)}</ul>
       </div>
     );
