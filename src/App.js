@@ -7,7 +7,6 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.changeSubject = debounce(750,this.changeSubject);
     this.state = {tweets:[],key:0, input: 'cats', panelVisible: false};
     this.socket = new SocketClient(window.location.hostname, {query:"tweets=" + this.state.input});
     this.socket.on('connect', function(){
