@@ -54,12 +54,12 @@ class App extends Component {
     this.setState({ input: event.target.value.trim() });
   }
   
-  changeSubject(socket) {
-    if(this.state.input !== this.state.lastInput)
-    {
-      socket.emit('change query',this.state.input);
-      this.setState({ lastInput: this.state.input, tweets: [] });
-    } 
+  changeSubject(socket, subject) {
+    //if(subject !== subject)
+    //{
+      socket.emit('change query',subject);
+      //this.setState({ lastInput: this.state.input, tweets: [] });
+    //} 
   }
 
     handleClick(event) {
