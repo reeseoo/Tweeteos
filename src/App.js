@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import SocketClient from 'socket.io-client';
 import TweeteoCard from './components/tweeteoCard'
 import ControlPanel from './components/controlPanel'
-import {debounce} from 'throttle-debounce';
 import './App.css';
 
 class App extends Component {
@@ -54,14 +53,6 @@ class App extends Component {
     this.setState({ input: event.target.value.trim() });
   }
   
-  changeSubject(socket, subject) {
-    //if(subject !== subject)
-    //{
-      socket.emit('change query',subject);
-      //this.setState({ lastInput: this.state.input, tweets: [] });
-    //} 
-  }
-
     handleClick(event) {
     this.setState({ panelVisible: !this.state.panelVisible });
   }
