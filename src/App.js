@@ -7,8 +7,8 @@ import './App.css';
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {tweets:[],key:0, input: 'cats', panelVisible: false};
-    this.socket = new SocketClient(window.location.hostname, {query:"tweets=" + this.state.input});
+    this.state = {tweets:[],key:0, input: 'cats', panelVisible: false};    
+    this.socket = new SocketClient('/', {query:"tweets=" + this.state.input});
     this.socket.on('connect', function(){
       console.log('connected')
     });
@@ -60,6 +60,7 @@ class App extends Component {
     return (
       <div className="App">
         <div className="App-header"><h1 className="App-heading">Tweeteos</h1></div>
+        <a href="/auth/twitter" class="btn btn-info"><span class="fa fa-twitter"></span> Twitter</a>
         <ControlPanel panelVisible={this.state.panelVisible} input={this.state.input} changeSubject={this.changeSubject} handleChange={this.handleChange} socket={this.socket}/>
         <div style={{height: "50px", width: "30px", backgroundColor:"black", position: "absolute", top: "0"}} onClick={this.handleClick.bind(this)}></div>
         <ul>{this.state.tweets.map((tweet) =><li key={tweet.key}><TweeteoCard tweet={tweet}/></li>)}</ul>
